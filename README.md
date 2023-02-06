@@ -29,5 +29,6 @@ The script includes an optional proxy configuration that can be enabled by setti
 
 Note
 This script is intended for educational purposes only and should not be used to access email accounts without proper authorization.
-ALL TRUELY CODED BY CHATGPT FULLY CREDIT TO @CHATGPT
+ALL TRUELY CODED BY CHATGPT FULLY CREDIT TO Yuhuang Hu (miybvladi) @miybvladi who created this amazon new era were the task is handle by our assistance 
+and its very usefull for a coders, webmaster, and a content writer and many more to discover
 
